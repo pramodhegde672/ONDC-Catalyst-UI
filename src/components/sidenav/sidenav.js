@@ -202,10 +202,18 @@ function Sidenavs() {
         </Grid>
 
         <List>
-          <ListItem disablePadding>
+          <ListItem
+            disablePadding
+            sx={{ "&:hover": { backgroundColor: "#EBE7F2" } }}
+          >
             <ListItemButton>
-              <ListItemIcon>
-                <DashboardIcon color="action" sx={{ marginLeft: "16px" }} />
+              <ListItemIcon
+                sx={{
+                  color: "#898989",
+                  "&:hover": { color: "#775DA6" },
+                }}
+              >
+                <DashboardIcon sx={{ marginLeft: "16px" }} />
               </ListItemIcon>
               <ListItemText primary="Dashboard" />
             </ListItemButton>
@@ -215,37 +223,68 @@ function Sidenavs() {
             onClick={() => {
               <Discovery1 />;
             }}
+            sx={{ "&:hover": { backgroundColor: "#EBE7F2" } }}
           >
             <ListItemButton onClick={discovery1}>
-              <ListItemIcon>
-                <StoreIcon color="action" sx={{ marginLeft: "16px" }} />
+              <ListItemIcon
+                sx={{
+                  color: "#898989",
+                  "&:hover": { color: "#775DA6" },
+                }}
+              >
+                <StoreIcon sx={{ marginLeft: "16px" }} />
               </ListItemIcon>
               <ListItemText primary="Discovery" />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
+          <ListItem
+            disablePadding
+            sx={{ "&:hover": { backgroundColor: "#EBE7F2" } }}
+          >
             <ListItemButton>
-              <ListItemIcon>
-                <SupervisorAccountIcon
-                  color="action"
-                  sx={{ marginLeft: "16px" }}
-                />
+              <ListItemIcon
+                sx={{
+                  color: "#898989",
+                  "&:hover": { color: "#775DA6" },
+                }}
+              >
+                <SupervisorAccountIcon sx={{ marginLeft: "16px" }} />
               </ListItemIcon>
               <ListItemText primary="Vendors" />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
+          <ListItem
+            disablePadding
+            sx={{ "&:hover": { backgroundColor: "#EBE7F2" } }}
+          >
             <ListItemButton>
-              <ListItemIcon>
-                <FolderSpecialIcon color="action" sx={{ marginLeft: "16px" }} />
+              <ListItemIcon
+                sx={{
+                  color: "#898989",
+                  "&:hover": { color: "#775DA6" },
+                }}
+              >
+                <FolderSpecialIcon
+                  sx={{
+                    marginLeft: "16px",
+                  }}
+                />
               </ListItemIcon>
               <ListItemText primary="Catalogs" />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
+          <ListItem
+            disablePadding
+            sx={{ "&:hover": { backgroundColor: "#EBE7F2" } }}
+          >
             <ListItemButton>
-              <ListItemIcon>
-                <ReceiptIcon color="action" sx={{ marginLeft: "16px" }} />
+              <ListItemIcon
+                sx={{
+                  color: "#898989",
+                  "&:hover": { color: "#775DA6" },
+                }}
+              >
+                <ReceiptIcon sx={{ marginLeft: "16px" }} />
               </ListItemIcon>
               <ListItemText primary="Sales Orders" />
             </ListItemButton>
