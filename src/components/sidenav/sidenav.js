@@ -23,6 +23,7 @@ import Avatar from "@mui/material/Avatar";
 import Discovery1 from "../discovery1";
 import { useNavigate } from "react-router-dom";
 import ImageIcon from "../../images/Ellipse.jpg";
+import Badge from "@mui/material/Badge";
 
 const drawerWidth = 220;
 
@@ -115,7 +116,9 @@ function Sidenavs() {
                     // Handle the button click here
                   }}
                 >
-                  <CircleNotificationsIcon color="action" />
+                  <Badge color="secondary" variant="dot">
+                    <CircleNotificationsIcon color="action" />
+                  </Badge>
                 </IconButton>
               </Box>
             </Grid>

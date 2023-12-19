@@ -15,6 +15,8 @@ import {
   CardActionArea,
   CardMedia,
   Rating,
+  Link,
+  hexToRgb,
 } from "@mui/material";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 import Form from "react-bootstrap/Form";
@@ -29,6 +31,8 @@ import {
   more,
 } from "../axios/services/HomeServices";
 import Divider from "@mui/material/Divider";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 function Discovery2() {
   const buttonStyle = {
@@ -258,142 +262,480 @@ function Discovery2() {
                 <TabPanel value={value} index="one">
                   {/* Content for "Best" Tab */}
                   <Grid Container>
-                    {bestdata.map((result, index) => (
-                      <Grid
-                        item
-                        key={index}
-                        xs={6}
-                        style={{ paddingBottom: "20px" }}
-                      >
-                        <Card
-                          className="carditem"
-                          style={{ width: "40%", height: "198px" }}
+                    {bestdata.map((result, index) => {
+                      return (
+                        <Grid
+                          item
+                          key={index}
+                          xs={6}
+                          style={{ paddingBottom: "20px" }}
                         >
-                          <CardActionArea>
-                            <Grid container>
-                              <Grid item xs={4}>
-                                <CardMedia
-                                  component="img"
-                                  image={result.image}
-                                  alt="ibis"
+                          <Card
+                            className="carditem"
+                            style={{ width: "41%", height: "198px" }}
+                          >
+                            <CardActionArea>
+                              <Grid container>
+                                <Grid item xs={4}>
+                                  <CardMedia
+                                    component="img"
+                                    image={result.image}
+                                    alt="ibis"
+                                    style={{
+                                      width: "176px",
+                                      height: "198px",
+                                      borderRadius: "8px 8px 0px opx",
+                                    }}
+                                  />
+                                </Grid>
+                                <Grid
+                                  item
+                                  xs={5}
                                   style={{
-                                    width: "176px",
-                                    height: "198px",
-                                    borderRadius: "8px 8px 0px opx",
-                                  }}
-                                />
-                              </Grid>
-                              <Grid
-                                item
-                                xs={4}
-                                style={{
-                                  display: "flex",
-                                  width: "231px",
-                                  // padding: "12px 0px",
-                                  flexDirection: "column",
-                                  alignItems: "flex-start",
-                                  gap: "8px",
-                                }}
-                              >
-                                <CardContent
-                                  style={{
-                                    paddingTop: "12px",
-                                    paddingLeft: "3px",
+                                    display: "flex",
+                                    width: "231px",
+                                    // padding: "12px 0px",
+                                    flexDirection: "column",
+                                    alignItems: "flex-start",
+                                    gap: "8px",
                                   }}
                                 >
-                                  <Typography
+                                  <CardContent
                                     style={{
-                                      width: "231px",
-                                      color: "#000",
-                                      fontFamily: "Inter",
-                                      fontSize: "16px",
-                                      fontStyle: "normal",
-                                      fontWeight: "700",
-                                      lineHeight: "normal",
+                                      paddingTop: "12px",
+                                      paddingLeft: "0px",
+                                      paddingBottom: "0px",
+                                      paddingRight: "0px",
+                                      width: "100%",
+                                      height: "100%",
                                     }}
                                   >
-                                    {result.placeName}
-                                  </Typography>
-                                  <Typography
-                                    style={{
-                                      width: "231px",
-                                      height: "23px",
-                                      color: "#959595",
-                                      fontFamily: "Inter",
-                                      fontSize: "10px",
-                                      fontStyle: "normal",
-                                      fontWeight: "400",
-                                      lineHeight: "normal",
-                                      paddingTop: "6px",
-                                    }}
-                                  >
-                                    {result.address}
-                                  </Typography>
-                                  <Grid
-                                    container
-                                    style={{ paddingTop: "26px" }}
-                                  >
-                                    <Grid item xs={2}>
-                                      <Typography
+                                    <Grid Container>
+                                      <Grid item xs={8}>
+                                        <Typography
+                                          style={{
+                                            width: "231px",
+                                            color: "#000",
+                                            fontFamily: "Inter",
+                                            fontSize: "16px",
+                                            fontStyle: "normal",
+                                            fontWeight: "700",
+                                            lineHeight: "normal",
+                                          }}
+                                        >
+                                          {result.placeName}
+                                        </Typography>
+                                      </Grid>
+
+                                      <Grid item xs={8}>
+                                        <Typography
+                                          style={{
+                                            width: "231px",
+                                            height: "23px",
+                                            color: "#959595",
+                                            fontFamily: "Inter",
+                                            fontSize: "10px",
+                                            fontStyle: "normal",
+                                            fontWeight: "400",
+                                            lineHeight: "normal",
+                                            paddingTop: "6px",
+                                          }}
+                                        >
+                                          {result.address}
+                                        </Typography>
+                                      </Grid>
+
+                                      <Grid
+                                        container
+                                        style={{ paddingTop: "26px" }}
+                                      >
+                                        <Grid item xs={2}>
+                                          <Typography
+                                            style={{
+                                              color: "#000",
+                                              fontFamily: "Inter",
+                                              fontSize: "12px",
+                                              fontStyle: "normal",
+                                              fontWeight: "500",
+                                              lineHeight: "normal",
+                                              paddingTop: "3px",
+                                            }}
+                                          >
+                                            {result.ratings}
+                                          </Typography>
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                          <Rating
+                                            name="read-only"
+                                            precision={0.5}
+                                            size="small"
+                                            value={result.ratings}
+                                            readOnly
+                                          />
+                                        </Grid>
+                                        <Grid item xs={3}>
+                                          <Typography
+                                            style={{
+                                              color: "#ABABAB",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "400",
+                                              lineHeight: "normal",
+                                              paddingTop: "3px",
+                                            }}
+                                          >
+                                            {result.reviews}
+                                          </Typography>
+                                        </Grid>
+                                      </Grid>
+                                      <Divider
                                         style={{
-                                          color: "#000",
-                                          fontFamily: "Inter",
-                                          fontSize: "12px",
-                                          fontStyle: "normal",
-                                          fontWeight: "500",
-                                          lineHeight: "normal",
-                                          paddingTop: "3px",
+                                          height: "1px",
+                                          width: "220px",
+                                          marginTop: "14px",
+                                          border: "none",
+                                          borderBottom: "2px dotted #D8D8D8",
+                                        }}
+                                      />
+                                      <Grid
+                                        Container
+                                        style={{
+                                          display: "flex",
+                                          marginTop: "10px",
                                         }}
                                       >
-                                        {result.ratings}
-                                      </Typography>
+                                        <Grid
+                                          item
+                                          xs={3}
+                                          style={{
+                                            borderRight: "1px solid #C8CFDA",
+                                            height: "40px",
+                                          }}
+                                        >
+                                          <Link
+                                            href={result["bpp-link1"]}
+                                            underline="always"
+                                            style={{
+                                              color: "#005FFE",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "500",
+                                              lineHeight: "normal",
+                                            }}
+                                          >
+                                            {result.description1}
+                                          </Link>
+                                          <OpenInNewIcon
+                                            sx={{
+                                              width: "12px",
+                                              height: "10px",
+                                              marginLeft: "4px",
+                                            }}
+                                            color="action"
+                                          />
+                                          <Typography
+                                            style={{
+                                              color: "#000",
+                                              fontFamily: "Inter",
+                                              fontSize: "12px",
+                                              fontStyle: "normal",
+                                              fontWeight: "700",
+                                              lineHeight: "normal",
+                                              marginTop: "8px",
+                                            }}
+                                          >
+                                            {result.price1}
+                                          </Typography>
+                                        </Grid>
+
+                                        <Grid
+                                          item
+                                          xs={5}
+                                          style={{
+                                            borderRight: "1px solid #C8CFDA",
+                                            height: "40px",
+                                          }}
+                                        >
+                                          <Link
+                                            href={result["bpp-link2"]}
+                                            underline="always"
+                                            style={{
+                                              color: "#005FFE",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "500",
+                                              lineHeight: "normal",
+                                              marginLeft: "9px",
+                                            }}
+                                          >
+                                            {result.description2}
+                                          </Link>
+                                          <OpenInNewIcon
+                                            sx={{
+                                              width: "12px",
+                                              height: "10px",
+                                              marginLeft: "4px",
+                                            }}
+                                            color="action"
+                                          />
+                                          <Typography
+                                            style={{
+                                              color: "#000",
+                                              fontFamily: "Inter",
+                                              fontSize: "12px",
+                                              fontStyle: "normal",
+                                              fontWeight: "700",
+                                              lineHeight: "normal",
+                                              marginLeft: "9px",
+                                              marginTop: "8px",
+                                            }}
+                                          >
+                                            {result.price2}
+                                          </Typography>
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                          <Typography
+                                            style={{
+                                              color: "#005FFE",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "600",
+                                              lineHeight: "normal",
+                                              marginLeft: "9px",
+                                              marginTop: "1px",
+                                            }}
+                                          >
+                                            See More
+                                          </Typography>
+                                          <Button
+                                            style={{
+                                              height: "10px",
+                                              marginTop: "3px",
+                                            }}
+                                          >
+                                            <KeyboardArrowDownIcon fontSize="small" />
+                                          </Button>
+                                        </Grid>
+                                      </Grid>
                                     </Grid>
-                                    <Grid item xs={6}>
-                                      <Rating
-                                        name="read-only"
-                                        precision={0.5}
-                                        size="small"
-                                        value={result.ratings}
-                                        readOnly
+                                  </CardContent>
+
+                                  {/* <CardActions>
+                                  <Button size="small" color="primary">
+                                    See detail
+                                  </Button>
+                                </CardActions> */}
+                                </Grid>
+                                <Grid
+                                  item
+                                  xs={3}
+                                  style={{
+                                    borderLeft: "1px solid #C8CFDA",
+                                  }}
+                                >
+                                  <Grid Container>
+                                    <Grid item xs={12}>
+                                      {result.greatprice ? (
+                                        <Box
+                                          style={{
+                                            display: "flex",
+                                            width: "80px",
+                                            height: "20px",
+                                            padding: "4px",
+                                            marginLeft: "6px",
+                                            marginTop: "8px",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            gap: "8px",
+                                            borderRadius: "4px",
+                                            backgroundColor: "#005FFE",
+                                          }}
+                                        >
+                                          <Typography
+                                            style={{
+                                              color: "#FFF",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "600",
+                                              lineHeight: "22px",
+                                              letterSpacing: "-0.1px",
+                                            }}
+                                          >
+                                            {result.greatprice}
+                                          </Typography>
+                                        </Box>
+                                      ) : (
+                                        <div
+                                          style={{ marginTop: "28px" }}
+                                        ></div>
+                                      )}
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                      <CardMedia
+                                        component="img"
+                                        image={result.logo}
+                                        alt="logo"
+                                        style={{
+                                          width: "60%",
+                                          height: "25px",
+                                          marginLeft: "6px",
+                                          marginTop: "5px",
+                                        }}
                                       />
                                     </Grid>
-                                    <Grid item xs={4}>
-                                      <Typography
+                                    <Grid
+                                      item
+                                      xs={12}
+                                      style={{ display: "flex" }}
+                                    >
+                                      <del
                                         style={{
-                                          color: "#ABABAB",
+                                          width: "55px",
+                                          color: "#FE007A",
                                           fontFamily: "Inter",
                                           fontSize: "10px",
                                           fontStyle: "normal",
                                           fontWeight: "400",
                                           lineHeight: "normal",
-                                          paddingTop: "3px",
+                                          marginTop: "5px",
+                                          marginLeft: "6px",
                                         }}
                                       >
-                                        {result.reviews}
+                                        {result.originalprice}
+                                      </del>
+                                      <Typography
+                                        style={{
+                                          color: "#FE007A",
+                                          fontFamily: "Inter",
+                                          fontSize: "10px",
+                                          fontStyle: "normal",
+                                          fontWeight: "700",
+                                          lineHeight: "normal",
+                                          marginTop: "5px",
+                                          marginLeft: "5px",
+                                        }}
+                                      >
+                                        {result.discount}
                                       </Typography>
                                     </Grid>
+                                    <Grid
+                                      item
+                                      xs={12}
+                                      style={{
+                                        display: "flex",
+                                      }}
+                                    >
+                                      <Typography
+                                        style={{
+                                          color: "#000",
+                                          fontFamily: "Inter",
+                                          fontSize: "16px",
+                                          fontStyle: "normal",
+                                          fontWeight: "700",
+                                          lineHeight: "135.023%",
+                                          marginTop: "10px",
+                                          marginLeft: "4px",
+                                        }}
+                                      >
+                                        {result.price}
+                                      </Typography>
+                                      <Typography
+                                        style={{
+                                          color: "#BCBCBC",
+                                          fontFamily: "Inter",
+                                          fontSize: "10px",
+                                          fontStyle: "normal",
+                                          fontWeight: "400",
+                                          lineHeight: "135.023%",
+                                          marginTop: "15px",
+                                          marginLeft: "5px",
+                                        }}
+                                      >
+                                        {result.pricedesc1}
+                                      </Typography>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                      <Typography
+                                        style={{
+                                          color: "#BCBCBC",
+                                          fontFamily: "Inter",
+                                          fontSize: "10px",
+                                          fontStyle: "normal",
+                                          fontWeight: "400",
+                                          lineHeight: "135.023%",
+                                          marginLeft: "3px",
+                                        }}
+                                      >
+                                        {result.pricedesc2}
+                                      </Typography>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                      <Typography
+                                        style={{
+                                          color: "#BCBCBC",
+                                          fontFamily: "Inter",
+                                          fontSize: "10px",
+                                          fontStyle: "normal",
+                                          fontWeight: "400",
+                                          lineHeight: "135.023%",
+                                          marginTop: "12px",
+                                          marginLeft: "3px",
+                                        }}
+                                      >
+                                        {result.desc}
+                                      </Typography>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                      {result.buttonname ? (
+                                        <Button
+                                          variant="contained"
+                                          style={{
+                                            width: "120px",
+                                            height: "24px",
+                                            backgroundColor: "#775DA6",
+                                            marginLeft: "8px",
+                                            marginTop: "7px",
+                                          }}
+                                          onMouseDown={(event) =>
+                                            event.stopPropagation()
+                                          }
+                                          onClick={(event) => {
+                                            event.stopPropagation();
+                                            event.preventDefault();
+                                            console.log("Button clicked");
+                                          }}
+                                        >
+                                          <Typography
+                                            style={{
+                                              color: "#FFF",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "600",
+                                              lineHeight: "22px",
+                                              letterSpacing: "-0.1px",
+                                            }}
+                                          >
+                                            {result.buttonname}
+                                          </Typography>
+                                        </Button>
+                                      ) : (
+                                        ""
+                                      )}
+                                    </Grid>
                                   </Grid>
-                                  <Divider
-                                    style={{
-                                      height: "1px",
-                                      width: "230px",
-                                      marginTop: "12px",
-                                      border: "none",
-                                      borderBottom: "2px dotted #D8D8D8",
-                                    }}
-                                  />
-                                </CardContent>
-                                {/* <CardActions>
-                                  <Button size="small" color="primary">
-                                    See detail
-                                  </Button>
-                                </CardActions> */}
+                                </Grid>
                               </Grid>
-                            </Grid>
-                          </CardActionArea>
-                        </Card>
-                      </Grid>
-                    ))}
+                            </CardActionArea>
+                          </Card>
+                        </Grid>
+                      );
+                    })}
                   </Grid>
                 </TabPanel>
                 <TabPanel value={value} index="two">
@@ -526,17 +868,139 @@ function Discovery2() {
                                           </Typography>
                                         </Grid>
                                       </Grid>
-                                    </Grid>
+                                      <Divider
+                                        style={{
+                                          height: "1px",
+                                          width: "220px",
+                                          marginTop: "14px",
+                                          border: "none",
+                                          borderBottom: "2px dotted #D8D8D8",
+                                        }}
+                                      />
+                                      <Grid
+                                        Container
+                                        style={{
+                                          display: "flex",
+                                          marginTop: "10px",
+                                        }}
+                                      >
+                                        <Grid
+                                          item
+                                          xs={3}
+                                          style={{
+                                            borderRight: "1px solid #C8CFDA",
+                                            height: "40px",
+                                          }}
+                                        >
+                                          <Link
+                                            href={result["bpp-link1"]}
+                                            underline="always"
+                                            style={{
+                                              color: "#005FFE",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "500",
+                                              lineHeight: "normal",
+                                            }}
+                                          >
+                                            {result.description1}
+                                          </Link>
+                                          <OpenInNewIcon
+                                            sx={{
+                                              width: "12px",
+                                              height: "10px",
+                                              marginLeft: "4px",
+                                            }}
+                                            color="action"
+                                          />
+                                          <Typography
+                                            style={{
+                                              color: "#000",
+                                              fontFamily: "Inter",
+                                              fontSize: "12px",
+                                              fontStyle: "normal",
+                                              fontWeight: "700",
+                                              lineHeight: "normal",
+                                              marginTop: "8px",
+                                            }}
+                                          >
+                                            {result.price1}
+                                          </Typography>
+                                        </Grid>
 
-                                    <Divider
-                                      style={{
-                                        height: "1px",
-                                        width: "220px",
-                                        marginTop: "18px",
-                                        border: "none",
-                                        borderBottom: "2px dotted #D8D8D8",
-                                      }}
-                                    />
+                                        <Grid
+                                          item
+                                          xs={5}
+                                          style={{
+                                            borderRight: "1px solid #C8CFDA",
+                                            height: "40px",
+                                          }}
+                                        >
+                                          <Link
+                                            href={result["bpp-link2"]}
+                                            underline="always"
+                                            style={{
+                                              color: "#005FFE",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "500",
+                                              lineHeight: "normal",
+                                              marginLeft: "9px",
+                                            }}
+                                          >
+                                            {result.description2}
+                                          </Link>
+                                          <OpenInNewIcon
+                                            sx={{
+                                              width: "12px",
+                                              height: "10px",
+                                              marginLeft: "4px",
+                                            }}
+                                            color="action"
+                                          />
+                                          <Typography
+                                            style={{
+                                              color: "#000",
+                                              fontFamily: "Inter",
+                                              fontSize: "12px",
+                                              fontStyle: "normal",
+                                              fontWeight: "700",
+                                              lineHeight: "normal",
+                                              marginLeft: "9px",
+                                              marginTop: "8px",
+                                            }}
+                                          >
+                                            {result.price2}
+                                          </Typography>
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                          <Typography
+                                            style={{
+                                              color: "#005FFE",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "600",
+                                              lineHeight: "normal",
+                                              marginLeft: "9px",
+                                              marginTop: "1px",
+                                            }}
+                                          >
+                                            See More
+                                          </Typography>
+                                          <Button
+                                            style={{
+                                              height: "10px",
+                                              marginTop: "3px",
+                                            }}
+                                          >
+                                            <KeyboardArrowDownIcon fontSize="small" />
+                                          </Button>
+                                        </Grid>
+                                      </Grid>
+                                    </Grid>
                                   </CardContent>
 
                                   {/* <CardActions>
@@ -548,7 +1012,9 @@ function Discovery2() {
                                 <Grid
                                   item
                                   xs={3}
-                                  style={{ borderLeft: "1px solid #C8CFDA" }}
+                                  style={{
+                                    borderLeft: "1px solid #C8CFDA",
+                                  }}
                                 >
                                   <Grid Container>
                                     <Grid item xs={12}>
@@ -608,7 +1074,7 @@ function Discovery2() {
                                     >
                                       <del
                                         style={{
-                                          width: "40px",
+                                          width: "55px",
                                           color: "#FE007A",
                                           fontFamily: "Inter",
                                           fontSize: "10px",
@@ -630,6 +1096,7 @@ function Discovery2() {
                                           fontWeight: "700",
                                           lineHeight: "normal",
                                           marginTop: "5px",
+                                          marginLeft: "5px",
                                         }}
                                       >
                                         {result.discount}
@@ -638,7 +1105,9 @@ function Discovery2() {
                                     <Grid
                                       item
                                       xs={12}
-                                      style={{ display: "flex" }}
+                                      style={{
+                                        display: "flex",
+                                      }}
                                     >
                                       <Typography
                                         style={{
@@ -649,7 +1118,7 @@ function Discovery2() {
                                           fontWeight: "700",
                                           lineHeight: "135.023%",
                                           marginTop: "10px",
-                                          marginLeft: "6px",
+                                          marginLeft: "4px",
                                         }}
                                       >
                                         {result.price}
@@ -702,30 +1171,38 @@ function Discovery2() {
                                     </Grid>
                                     <Grid item xs={12}>
                                       {result.buttonname ? (
-                                        <CardActions onClick={() => {}}>
-                                          <Button
-                                            variant="contained"
+                                        <Button
+                                          variant="contained"
+                                          style={{
+                                            width: "120px",
+                                            height: "24px",
+                                            backgroundColor: "#775DA6",
+                                            marginLeft: "8px",
+                                            marginTop: "7px",
+                                          }}
+                                          onMouseDown={(event) =>
+                                            event.stopPropagation()
+                                          }
+                                          onClick={(event) => {
+                                            event.stopPropagation();
+                                            event.preventDefault();
+                                            console.log("Button clicked");
+                                          }}
+                                        >
+                                          <Typography
                                             style={{
-                                              width: "139px",
-                                              height: "24px",
-                                              backgroundColor: "#775DA6",
+                                              color: "#FFF",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "600",
+                                              lineHeight: "22px",
+                                              letterSpacing: "-0.1px",
                                             }}
                                           >
-                                            <Typography
-                                              style={{
-                                                color: "#FFF",
-                                                fontFamily: "Inter",
-                                                fontSize: "10px",
-                                                fontStyle: "normal",
-                                                fontWeight: "600",
-                                                lineHeight: "22px",
-                                                letterSpacing: "-0.1px",
-                                              }}
-                                            >
-                                              {result.buttonname}
-                                            </Typography>
-                                          </Button>
-                                        </CardActions>
+                                            {result.buttonname}
+                                          </Typography>
+                                        </Button>
                                       ) : (
                                         ""
                                       )}
@@ -743,421 +1220,1440 @@ function Discovery2() {
                 <TabPanel value={value} index="three">
                   {/* Content for "Lowest Price" Tab */}
                   <Grid Container>
-                    {lowestPricedata.map((result, index) => (
-                      <Grid
-                        item
-                        key={index}
-                        xs={6}
-                        style={{ paddingBottom: "20px" }}
-                      >
-                        <Card
-                          className="carditem"
-                          style={{ width: "40%", height: "198px" }}
+                    {lowestPricedata.map((result, index) => {
+                      return (
+                        <Grid
+                          item
+                          key={index}
+                          xs={6}
+                          style={{ paddingBottom: "20px" }}
                         >
-                          <CardActionArea>
-                            <Grid container>
-                              <Grid item xs={4}>
-                                <CardMedia
-                                  component="img"
-                                  image={result.image}
-                                  alt="ibis"
+                          <Card
+                            className="carditem"
+                            style={{ width: "41%", height: "198px" }}
+                          >
+                            <CardActionArea>
+                              <Grid container>
+                                <Grid item xs={4}>
+                                  <CardMedia
+                                    component="img"
+                                    image={result.image}
+                                    alt="ibis"
+                                    style={{
+                                      width: "176px",
+                                      height: "198px",
+                                      borderRadius: "8px 8px 0px opx",
+                                    }}
+                                  />
+                                </Grid>
+                                <Grid
+                                  item
+                                  xs={5}
                                   style={{
-                                    width: "176px",
-                                    height: "198px",
-                                    borderRadius: "8px 8px 0px opx",
-                                  }}
-                                />
-                              </Grid>
-                              <Grid
-                                item
-                                xs={4}
-                                style={{
-                                  display: "flex",
-                                  width: "231px",
-                                  // padding: "12px 0px",
-                                  flexDirection: "column",
-                                  alignItems: "flex-start",
-                                  gap: "8px",
-                                }}
-                              >
-                                <CardContent
-                                  style={{
-                                    paddingTop: "12px",
-                                    paddingLeft: "3px",
+                                    display: "flex",
+                                    width: "231px",
+                                    // padding: "12px 0px",
+                                    flexDirection: "column",
+                                    alignItems: "flex-start",
+                                    gap: "8px",
                                   }}
                                 >
-                                  <Typography
+                                  <CardContent
                                     style={{
-                                      width: "231px",
-                                      color: "#000",
-                                      fontFamily: "Inter",
-                                      fontSize: "16px",
-                                      fontStyle: "normal",
-                                      fontWeight: "700",
-                                      lineHeight: "normal",
+                                      paddingTop: "12px",
+                                      paddingLeft: "0px",
+                                      paddingBottom: "0px",
+                                      paddingRight: "0px",
+                                      width: "100%",
+                                      height: "100%",
                                     }}
                                   >
-                                    {result.placeName}
-                                  </Typography>
-                                  <Typography
-                                    style={{
-                                      width: "231px",
-                                      height: "23px",
-                                      color: "#959595",
-                                      fontFamily: "Inter",
-                                      fontSize: "10px",
-                                      fontStyle: "normal",
-                                      fontWeight: "400",
-                                      lineHeight: "normal",
-                                      paddingTop: "6px",
-                                    }}
-                                  >
-                                    {result.address}
-                                  </Typography>
-                                  <Grid
-                                    container
-                                    style={{ paddingTop: "26px" }}
-                                  >
-                                    <Grid item xs={2}>
-                                      <Typography
+                                    <Grid Container>
+                                      <Grid item xs={8}>
+                                        <Typography
+                                          style={{
+                                            width: "231px",
+                                            color: "#000",
+                                            fontFamily: "Inter",
+                                            fontSize: "16px",
+                                            fontStyle: "normal",
+                                            fontWeight: "700",
+                                            lineHeight: "normal",
+                                          }}
+                                        >
+                                          {result.placeName}
+                                        </Typography>
+                                      </Grid>
+
+                                      <Grid item xs={8}>
+                                        <Typography
+                                          style={{
+                                            width: "231px",
+                                            height: "23px",
+                                            color: "#959595",
+                                            fontFamily: "Inter",
+                                            fontSize: "10px",
+                                            fontStyle: "normal",
+                                            fontWeight: "400",
+                                            lineHeight: "normal",
+                                            paddingTop: "6px",
+                                          }}
+                                        >
+                                          {result.address}
+                                        </Typography>
+                                      </Grid>
+
+                                      <Grid
+                                        container
+                                        style={{ paddingTop: "26px" }}
+                                      >
+                                        <Grid item xs={2}>
+                                          <Typography
+                                            style={{
+                                              color: "#000",
+                                              fontFamily: "Inter",
+                                              fontSize: "12px",
+                                              fontStyle: "normal",
+                                              fontWeight: "500",
+                                              lineHeight: "normal",
+                                              paddingTop: "3px",
+                                            }}
+                                          >
+                                            {result.ratings}
+                                          </Typography>
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                          <Rating
+                                            name="read-only"
+                                            precision={0.5}
+                                            size="small"
+                                            value={result.ratings}
+                                            readOnly
+                                          />
+                                        </Grid>
+                                        <Grid item xs={3}>
+                                          <Typography
+                                            style={{
+                                              color: "#ABABAB",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "400",
+                                              lineHeight: "normal",
+                                              paddingTop: "3px",
+                                            }}
+                                          >
+                                            {result.reviews}
+                                          </Typography>
+                                        </Grid>
+                                      </Grid>
+                                      <Divider
                                         style={{
-                                          color: "#000",
-                                          fontFamily: "Inter",
-                                          fontSize: "12px",
-                                          fontStyle: "normal",
-                                          fontWeight: "500",
-                                          lineHeight: "normal",
-                                          paddingTop: "3px",
+                                          height: "1px",
+                                          width: "220px",
+                                          marginTop: "14px",
+                                          border: "none",
+                                          borderBottom: "2px dotted #D8D8D8",
+                                        }}
+                                      />
+                                      <Grid
+                                        Container
+                                        style={{
+                                          display: "flex",
+                                          marginTop: "10px",
                                         }}
                                       >
-                                        {result.ratings}
-                                      </Typography>
+                                        <Grid
+                                          item
+                                          xs={3}
+                                          style={{
+                                            borderRight: "1px solid #C8CFDA",
+                                            height: "40px",
+                                          }}
+                                        >
+                                          <Link
+                                            href={result["bpp-link1"]}
+                                            underline="always"
+                                            style={{
+                                              color: "#005FFE",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "500",
+                                              lineHeight: "normal",
+                                            }}
+                                          >
+                                            {result.description1}
+                                          </Link>
+                                          <OpenInNewIcon
+                                            sx={{
+                                              width: "12px",
+                                              height: "10px",
+                                              marginLeft: "4px",
+                                            }}
+                                            color="action"
+                                          />
+                                          <Typography
+                                            style={{
+                                              color: "#000",
+                                              fontFamily: "Inter",
+                                              fontSize: "12px",
+                                              fontStyle: "normal",
+                                              fontWeight: "700",
+                                              lineHeight: "normal",
+                                              marginTop: "8px",
+                                            }}
+                                          >
+                                            {result.price1}
+                                          </Typography>
+                                        </Grid>
+
+                                        <Grid
+                                          item
+                                          xs={5}
+                                          style={{
+                                            borderRight: "1px solid #C8CFDA",
+                                            height: "40px",
+                                          }}
+                                        >
+                                          <Link
+                                            href={result["bpp-link2"]}
+                                            underline="always"
+                                            style={{
+                                              color: "#005FFE",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "500",
+                                              lineHeight: "normal",
+                                              marginLeft: "9px",
+                                            }}
+                                          >
+                                            {result.description2}
+                                          </Link>
+                                          <OpenInNewIcon
+                                            sx={{
+                                              width: "12px",
+                                              height: "10px",
+                                              marginLeft: "4px",
+                                            }}
+                                            color="action"
+                                          />
+                                          <Typography
+                                            style={{
+                                              color: "#000",
+                                              fontFamily: "Inter",
+                                              fontSize: "12px",
+                                              fontStyle: "normal",
+                                              fontWeight: "700",
+                                              lineHeight: "normal",
+                                              marginLeft: "9px",
+                                              marginTop: "8px",
+                                            }}
+                                          >
+                                            {result.price2}
+                                          </Typography>
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                          <Typography
+                                            style={{
+                                              color: "#005FFE",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "600",
+                                              lineHeight: "normal",
+                                              marginLeft: "9px",
+                                              marginTop: "1px",
+                                            }}
+                                          >
+                                            See More
+                                          </Typography>
+                                          <Button
+                                            style={{
+                                              height: "10px",
+                                              marginTop: "3px",
+                                            }}
+                                          >
+                                            <KeyboardArrowDownIcon fontSize="small" />
+                                          </Button>
+                                        </Grid>
+                                      </Grid>
                                     </Grid>
-                                    <Grid item xs={6}>
-                                      <Rating
-                                        name="read-only"
-                                        precision={0.5}
-                                        size="small"
-                                        value={result.ratings}
-                                        readOnly
+                                  </CardContent>
+
+                                  {/* <CardActions>
+                                  <Button size="small" color="primary">
+                                    See detail
+                                  </Button>
+                                </CardActions> */}
+                                </Grid>
+                                <Grid
+                                  item
+                                  xs={3}
+                                  style={{
+                                    borderLeft: "1px solid #C8CFDA",
+                                  }}
+                                >
+                                  <Grid Container>
+                                    <Grid item xs={12}>
+                                      {result.greatprice ? (
+                                        <Box
+                                          style={{
+                                            display: "flex",
+                                            width: "80px",
+                                            height: "20px",
+                                            padding: "4px",
+                                            marginLeft: "6px",
+                                            marginTop: "8px",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            gap: "8px",
+                                            borderRadius: "4px",
+                                            backgroundColor: "#005FFE",
+                                          }}
+                                        >
+                                          <Typography
+                                            style={{
+                                              color: "#FFF",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "600",
+                                              lineHeight: "22px",
+                                              letterSpacing: "-0.1px",
+                                            }}
+                                          >
+                                            {result.greatprice}
+                                          </Typography>
+                                        </Box>
+                                      ) : (
+                                        <div
+                                          style={{ marginTop: "28px" }}
+                                        ></div>
+                                      )}
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                      <CardMedia
+                                        component="img"
+                                        image={result.logo}
+                                        alt="logo"
+                                        style={{
+                                          width: "60%",
+                                          height: "25px",
+                                          marginLeft: "6px",
+                                          marginTop: "5px",
+                                        }}
                                       />
                                     </Grid>
-                                    <Grid item xs={4}>
-                                      <Typography
+                                    <Grid
+                                      item
+                                      xs={12}
+                                      style={{ display: "flex" }}
+                                    >
+                                      <del
                                         style={{
-                                          color: "#ABABAB",
+                                          width: "55px",
+                                          color: "#FE007A",
                                           fontFamily: "Inter",
                                           fontSize: "10px",
                                           fontStyle: "normal",
                                           fontWeight: "400",
                                           lineHeight: "normal",
-                                          paddingTop: "3px",
+                                          marginTop: "5px",
+                                          marginLeft: "6px",
                                         }}
                                       >
-                                        {result.reviews}
+                                        {result.originalprice}
+                                      </del>
+                                      <Typography
+                                        style={{
+                                          color: "#FE007A",
+                                          fontFamily: "Inter",
+                                          fontSize: "10px",
+                                          fontStyle: "normal",
+                                          fontWeight: "700",
+                                          lineHeight: "normal",
+                                          marginTop: "5px",
+                                          marginLeft: "5px",
+                                        }}
+                                      >
+                                        {result.discount}
                                       </Typography>
                                     </Grid>
+                                    <Grid
+                                      item
+                                      xs={12}
+                                      style={{
+                                        display: "flex",
+                                      }}
+                                    >
+                                      <Typography
+                                        style={{
+                                          color: "#000",
+                                          fontFamily: "Inter",
+                                          fontSize: "16px",
+                                          fontStyle: "normal",
+                                          fontWeight: "700",
+                                          lineHeight: "135.023%",
+                                          marginTop: "10px",
+                                          marginLeft: "4px",
+                                        }}
+                                      >
+                                        {result.price}
+                                      </Typography>
+                                      <Typography
+                                        style={{
+                                          color: "#BCBCBC",
+                                          fontFamily: "Inter",
+                                          fontSize: "10px",
+                                          fontStyle: "normal",
+                                          fontWeight: "400",
+                                          lineHeight: "135.023%",
+                                          marginTop: "15px",
+                                          marginLeft: "5px",
+                                        }}
+                                      >
+                                        {result.pricedesc1}
+                                      </Typography>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                      <Typography
+                                        style={{
+                                          color: "#BCBCBC",
+                                          fontFamily: "Inter",
+                                          fontSize: "10px",
+                                          fontStyle: "normal",
+                                          fontWeight: "400",
+                                          lineHeight: "135.023%",
+                                          marginLeft: "3px",
+                                        }}
+                                      >
+                                        {result.pricedesc2}
+                                      </Typography>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                      <Typography
+                                        style={{
+                                          color: "#BCBCBC",
+                                          fontFamily: "Inter",
+                                          fontSize: "10px",
+                                          fontStyle: "normal",
+                                          fontWeight: "400",
+                                          lineHeight: "135.023%",
+                                          marginTop: "12px",
+                                          marginLeft: "3px",
+                                        }}
+                                      >
+                                        {result.desc}
+                                      </Typography>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                      {result.buttonname ? (
+                                        <Button
+                                          variant="contained"
+                                          style={{
+                                            width: "120px",
+                                            height: "24px",
+                                            backgroundColor: "#775DA6",
+                                            marginLeft: "8px",
+                                            marginTop: "7px",
+                                          }}
+                                          onMouseDown={(event) =>
+                                            event.stopPropagation()
+                                          }
+                                          onClick={(event) => {
+                                            event.stopPropagation();
+                                            event.preventDefault();
+                                            console.log("Button clicked");
+                                          }}
+                                        >
+                                          <Typography
+                                            style={{
+                                              color: "#FFF",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "600",
+                                              lineHeight: "22px",
+                                              letterSpacing: "-0.1px",
+                                            }}
+                                          >
+                                            {result.buttonname}
+                                          </Typography>
+                                        </Button>
+                                      ) : (
+                                        ""
+                                      )}
+                                    </Grid>
                                   </Grid>
-                                  <Divider
-                                    style={{
-                                      height: "1px",
-                                      width: "230px",
-                                      marginTop: "12px",
-                                      border: "none",
-                                      borderBottom: "2px dotted #D8D8D8",
-                                    }}
-                                  />
-                                </CardContent>
+                                </Grid>
                               </Grid>
-                            </Grid>
-                          </CardActionArea>
-                        </Card>
-                      </Grid>
-                    ))}
+                            </CardActionArea>
+                          </Card>
+                        </Grid>
+                      );
+                    })}
                   </Grid>
                 </TabPanel>
 
                 <TabPanel value={value} index="four">
                   {/* Content for "Most Stars" Tab */}
                   <Grid Container>
-                    {mostStarsdata.map((result, index) => (
-                      <Grid
-                        item
-                        key={index}
-                        xs={6}
-                        style={{ paddingBottom: "20px" }}
-                      >
-                        <Card
-                          className="carditem"
-                          style={{ width: "40%", height: "198px" }}
+                    {mostStarsdata.map((result, index) => {
+                      return (
+                        <Grid
+                          item
+                          key={index}
+                          xs={6}
+                          style={{ paddingBottom: "20px" }}
                         >
-                          <CardActionArea>
-                            <Grid container>
-                              <Grid item xs={4}>
-                                <CardMedia
-                                  component="img"
-                                  image={result.image}
-                                  alt="ibis"
+                          <Card
+                            className="carditem"
+                            style={{ width: "41%", height: "198px" }}
+                          >
+                            <CardActionArea>
+                              <Grid container>
+                                <Grid item xs={4}>
+                                  <CardMedia
+                                    component="img"
+                                    image={result.image}
+                                    alt="ibis"
+                                    style={{
+                                      width: "176px",
+                                      height: "198px",
+                                      borderRadius: "8px 8px 0px opx",
+                                    }}
+                                  />
+                                </Grid>
+                                <Grid
+                                  item
+                                  xs={5}
                                   style={{
-                                    width: "176px",
-                                    height: "198px",
-                                    borderRadius: "8px 8px 0px opx",
-                                  }}
-                                />
-                              </Grid>
-                              <Grid
-                                item
-                                xs={4}
-                                style={{
-                                  display: "flex",
-                                  width: "231px",
-                                  // padding: "12px 0px",
-                                  flexDirection: "column",
-                                  alignItems: "flex-start",
-                                  gap: "8px",
-                                }}
-                              >
-                                <CardContent
-                                  style={{
-                                    paddingTop: "12px",
-                                    paddingLeft: "3px",
+                                    display: "flex",
+                                    width: "231px",
+                                    // padding: "12px 0px",
+                                    flexDirection: "column",
+                                    alignItems: "flex-start",
+                                    gap: "8px",
                                   }}
                                 >
-                                  <Typography
+                                  <CardContent
                                     style={{
-                                      width: "231px",
-                                      color: "#000",
-                                      fontFamily: "Inter",
-                                      fontSize: "16px",
-                                      fontStyle: "normal",
-                                      fontWeight: "700",
-                                      lineHeight: "normal",
+                                      paddingTop: "12px",
+                                      paddingLeft: "0px",
+                                      paddingBottom: "0px",
+                                      paddingRight: "0px",
+                                      width: "100%",
+                                      height: "100%",
                                     }}
                                   >
-                                    {result.placeName}
-                                  </Typography>
-                                  <Typography
-                                    style={{
-                                      width: "231px",
-                                      height: "23px",
-                                      color: "#959595",
-                                      fontFamily: "Inter",
-                                      fontSize: "10px",
-                                      fontStyle: "normal",
-                                      fontWeight: "400",
-                                      lineHeight: "normal",
-                                      paddingTop: "6px",
-                                    }}
-                                  >
-                                    {result.address}
-                                  </Typography>
-                                  <Grid
-                                    container
-                                    style={{ paddingTop: "26px" }}
-                                  >
-                                    <Grid item xs={2}>
-                                      <Typography
+                                    <Grid Container>
+                                      <Grid item xs={8}>
+                                        <Typography
+                                          style={{
+                                            width: "231px",
+                                            color: "#000",
+                                            fontFamily: "Inter",
+                                            fontSize: "16px",
+                                            fontStyle: "normal",
+                                            fontWeight: "700",
+                                            lineHeight: "normal",
+                                          }}
+                                        >
+                                          {result.placeName}
+                                        </Typography>
+                                      </Grid>
+
+                                      <Grid item xs={8}>
+                                        <Typography
+                                          style={{
+                                            width: "231px",
+                                            height: "23px",
+                                            color: "#959595",
+                                            fontFamily: "Inter",
+                                            fontSize: "10px",
+                                            fontStyle: "normal",
+                                            fontWeight: "400",
+                                            lineHeight: "normal",
+                                            paddingTop: "6px",
+                                          }}
+                                        >
+                                          {result.address}
+                                        </Typography>
+                                      </Grid>
+
+                                      <Grid
+                                        container
+                                        style={{ paddingTop: "26px" }}
+                                      >
+                                        <Grid item xs={2}>
+                                          <Typography
+                                            style={{
+                                              color: "#000",
+                                              fontFamily: "Inter",
+                                              fontSize: "12px",
+                                              fontStyle: "normal",
+                                              fontWeight: "500",
+                                              lineHeight: "normal",
+                                              paddingTop: "3px",
+                                            }}
+                                          >
+                                            {result.ratings}
+                                          </Typography>
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                          <Rating
+                                            name="read-only"
+                                            precision={0.5}
+                                            size="small"
+                                            value={result.ratings}
+                                            readOnly
+                                          />
+                                        </Grid>
+                                        <Grid item xs={3}>
+                                          <Typography
+                                            style={{
+                                              color: "#ABABAB",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "400",
+                                              lineHeight: "normal",
+                                              paddingTop: "3px",
+                                            }}
+                                          >
+                                            {result.reviews}
+                                          </Typography>
+                                        </Grid>
+                                      </Grid>
+                                      <Divider
                                         style={{
-                                          color: "#000",
-                                          fontFamily: "Inter",
-                                          fontSize: "12px",
-                                          fontStyle: "normal",
-                                          fontWeight: "500",
-                                          lineHeight: "normal",
-                                          paddingTop: "3px",
+                                          height: "1px",
+                                          width: "220px",
+                                          marginTop: "14px",
+                                          border: "none",
+                                          borderBottom: "2px dotted #D8D8D8",
+                                        }}
+                                      />
+                                      <Grid
+                                        Container
+                                        style={{
+                                          display: "flex",
+                                          marginTop: "10px",
                                         }}
                                       >
-                                        {result.ratings}
-                                      </Typography>
+                                        <Grid
+                                          item
+                                          xs={3}
+                                          style={{
+                                            borderRight: "1px solid #C8CFDA",
+                                            height: "40px",
+                                          }}
+                                        >
+                                          <Link
+                                            href={result["bpp-link1"]}
+                                            underline="always"
+                                            style={{
+                                              color: "#005FFE",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "500",
+                                              lineHeight: "normal",
+                                            }}
+                                          >
+                                            {result.description1}
+                                          </Link>
+                                          <OpenInNewIcon
+                                            sx={{
+                                              width: "12px",
+                                              height: "10px",
+                                              marginLeft: "4px",
+                                            }}
+                                            color="action"
+                                          />
+                                          <Typography
+                                            style={{
+                                              color: "#000",
+                                              fontFamily: "Inter",
+                                              fontSize: "12px",
+                                              fontStyle: "normal",
+                                              fontWeight: "700",
+                                              lineHeight: "normal",
+                                              marginTop: "8px",
+                                            }}
+                                          >
+                                            {result.price1}
+                                          </Typography>
+                                        </Grid>
+
+                                        <Grid
+                                          item
+                                          xs={5}
+                                          style={{
+                                            borderRight: "1px solid #C8CFDA",
+                                            height: "40px",
+                                          }}
+                                        >
+                                          <Link
+                                            href={result["bpp-link2"]}
+                                            underline="always"
+                                            style={{
+                                              color: "#005FFE",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "500",
+                                              lineHeight: "normal",
+                                              marginLeft: "9px",
+                                            }}
+                                          >
+                                            {result.description2}
+                                          </Link>
+                                          <OpenInNewIcon
+                                            sx={{
+                                              width: "12px",
+                                              height: "10px",
+                                              marginLeft: "4px",
+                                            }}
+                                            color="action"
+                                          />
+                                          <Typography
+                                            style={{
+                                              color: "#000",
+                                              fontFamily: "Inter",
+                                              fontSize: "12px",
+                                              fontStyle: "normal",
+                                              fontWeight: "700",
+                                              lineHeight: "normal",
+                                              marginLeft: "9px",
+                                              marginTop: "8px",
+                                            }}
+                                          >
+                                            {result.price2}
+                                          </Typography>
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                          <Typography
+                                            style={{
+                                              color: "#005FFE",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "600",
+                                              lineHeight: "normal",
+                                              marginLeft: "9px",
+                                              marginTop: "1px",
+                                            }}
+                                          >
+                                            See More
+                                          </Typography>
+                                          <Button
+                                            style={{
+                                              height: "10px",
+                                              marginTop: "3px",
+                                            }}
+                                          >
+                                            <KeyboardArrowDownIcon fontSize="small" />
+                                          </Button>
+                                        </Grid>
+                                      </Grid>
                                     </Grid>
-                                    <Grid item xs={6}>
-                                      <Rating
-                                        name="read-only"
-                                        precision={0.5}
-                                        size="small"
-                                        value={result.ratings}
-                                        readOnly
+                                  </CardContent>
+
+                                  {/* <CardActions>
+                                  <Button size="small" color="primary">
+                                    See detail
+                                  </Button>
+                                </CardActions> */}
+                                </Grid>
+                                <Grid
+                                  item
+                                  xs={3}
+                                  style={{
+                                    borderLeft: "1px solid #C8CFDA",
+                                  }}
+                                >
+                                  <Grid Container>
+                                    <Grid item xs={12}>
+                                      {result.greatprice ? (
+                                        <Box
+                                          style={{
+                                            display: "flex",
+                                            width: "80px",
+                                            height: "20px",
+                                            padding: "4px",
+                                            marginLeft: "6px",
+                                            marginTop: "8px",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            gap: "8px",
+                                            borderRadius: "4px",
+                                            backgroundColor: "#005FFE",
+                                          }}
+                                        >
+                                          <Typography
+                                            style={{
+                                              color: "#FFF",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "600",
+                                              lineHeight: "22px",
+                                              letterSpacing: "-0.1px",
+                                            }}
+                                          >
+                                            {result.greatprice}
+                                          </Typography>
+                                        </Box>
+                                      ) : (
+                                        <div
+                                          style={{ marginTop: "28px" }}
+                                        ></div>
+                                      )}
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                      <CardMedia
+                                        component="img"
+                                        image={result.logo}
+                                        alt="logo"
+                                        style={{
+                                          width: "60%",
+                                          height: "25px",
+                                          marginLeft: "6px",
+                                          marginTop: "5px",
+                                        }}
                                       />
                                     </Grid>
-                                    <Grid item xs={4}>
-                                      <Typography
+                                    <Grid
+                                      item
+                                      xs={12}
+                                      style={{ display: "flex" }}
+                                    >
+                                      <del
                                         style={{
-                                          color: "#ABABAB",
+                                          width: "55px",
+                                          color: "#FE007A",
                                           fontFamily: "Inter",
                                           fontSize: "10px",
                                           fontStyle: "normal",
                                           fontWeight: "400",
                                           lineHeight: "normal",
-                                          paddingTop: "3px",
+                                          marginTop: "5px",
+                                          marginLeft: "6px",
                                         }}
                                       >
-                                        {result.reviews}
+                                        {result.originalprice}
+                                      </del>
+                                      <Typography
+                                        style={{
+                                          color: "#FE007A",
+                                          fontFamily: "Inter",
+                                          fontSize: "10px",
+                                          fontStyle: "normal",
+                                          fontWeight: "700",
+                                          lineHeight: "normal",
+                                          marginTop: "5px",
+                                          marginLeft: "5px",
+                                        }}
+                                      >
+                                        {result.discount}
                                       </Typography>
                                     </Grid>
+                                    <Grid
+                                      item
+                                      xs={12}
+                                      style={{
+                                        display: "flex",
+                                      }}
+                                    >
+                                      <Typography
+                                        style={{
+                                          color: "#000",
+                                          fontFamily: "Inter",
+                                          fontSize: "16px",
+                                          fontStyle: "normal",
+                                          fontWeight: "700",
+                                          lineHeight: "135.023%",
+                                          marginTop: "10px",
+                                          marginLeft: "4px",
+                                        }}
+                                      >
+                                        {result.price}
+                                      </Typography>
+                                      <Typography
+                                        style={{
+                                          color: "#BCBCBC",
+                                          fontFamily: "Inter",
+                                          fontSize: "10px",
+                                          fontStyle: "normal",
+                                          fontWeight: "400",
+                                          lineHeight: "135.023%",
+                                          marginTop: "15px",
+                                          marginLeft: "5px",
+                                        }}
+                                      >
+                                        {result.pricedesc1}
+                                      </Typography>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                      <Typography
+                                        style={{
+                                          color: "#BCBCBC",
+                                          fontFamily: "Inter",
+                                          fontSize: "10px",
+                                          fontStyle: "normal",
+                                          fontWeight: "400",
+                                          lineHeight: "135.023%",
+                                          marginLeft: "3px",
+                                        }}
+                                      >
+                                        {result.pricedesc2}
+                                      </Typography>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                      <Typography
+                                        style={{
+                                          color: "#BCBCBC",
+                                          fontFamily: "Inter",
+                                          fontSize: "10px",
+                                          fontStyle: "normal",
+                                          fontWeight: "400",
+                                          lineHeight: "135.023%",
+                                          marginTop: "12px",
+                                          marginLeft: "3px",
+                                        }}
+                                      >
+                                        {result.desc}
+                                      </Typography>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                      {result.buttonname ? (
+                                        <Button
+                                          variant="contained"
+                                          style={{
+                                            width: "120px",
+                                            height: "24px",
+                                            backgroundColor: "#775DA6",
+                                            marginLeft: "8px",
+                                            marginTop: "7px",
+                                          }}
+                                          onMouseDown={(event) =>
+                                            event.stopPropagation()
+                                          }
+                                          onClick={(event) => {
+                                            event.stopPropagation();
+                                            event.preventDefault();
+                                            console.log("Button clicked");
+                                          }}
+                                        >
+                                          <Typography
+                                            style={{
+                                              color: "#FFF",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "600",
+                                              lineHeight: "22px",
+                                              letterSpacing: "-0.1px",
+                                            }}
+                                          >
+                                            {result.buttonname}
+                                          </Typography>
+                                        </Button>
+                                      ) : (
+                                        ""
+                                      )}
+                                    </Grid>
                                   </Grid>
-                                  <Divider
-                                    style={{
-                                      height: "1px",
-                                      width: "230px",
-                                      marginTop: "12px",
-                                      border: "none",
-                                      borderBottom: "2px dotted #D8D8D8",
-                                    }}
-                                  />
-                                </CardContent>
-                                {/* <CardActions>
-                                  <Button size="small" color="primary">
-                                    See detail
-                                  </Button>
-                                </CardActions> */}
+                                </Grid>
                               </Grid>
-                            </Grid>
-                          </CardActionArea>
-                        </Card>
-                      </Grid>
-                    ))}
+                            </CardActionArea>
+                          </Card>
+                        </Grid>
+                      );
+                    })}
                   </Grid>
                 </TabPanel>
 
                 <TabPanel value={value} index="five">
                   {/* Content for "More" Tab */}
                   <Grid Container>
-                    {moredata.map((result, index) => (
-                      <Grid
-                        item
-                        key={index}
-                        xs={6}
-                        style={{ paddingBottom: "20px" }}
-                      >
-                        <Card
-                          className="carditem"
-                          style={{ width: "40%", height: "198px" }}
+                    {moredata.map((result, index) => {
+                      return (
+                        <Grid
+                          item
+                          key={index}
+                          xs={6}
+                          style={{ paddingBottom: "20px" }}
                         >
-                          <CardActionArea>
-                            <Grid container>
-                              <Grid item xs={4}>
-                                <CardMedia
-                                  component="img"
-                                  image={result.image}
-                                  alt="ibis"
+                          <Card
+                            className="carditem"
+                            style={{ width: "41%", height: "198px" }}
+                          >
+                            <CardActionArea>
+                              <Grid container>
+                                <Grid item xs={4}>
+                                  <CardMedia
+                                    component="img"
+                                    image={result.image}
+                                    alt="ibis"
+                                    style={{
+                                      width: "176px",
+                                      height: "198px",
+                                      borderRadius: "8px 8px 0px opx",
+                                    }}
+                                  />
+                                </Grid>
+                                <Grid
+                                  item
+                                  xs={5}
                                   style={{
-                                    width: "176px",
-                                    height: "198px",
-                                    borderRadius: "8px 8px 0px opx",
-                                  }}
-                                />
-                              </Grid>
-                              <Grid
-                                item
-                                xs={4}
-                                style={{
-                                  display: "flex",
-                                  width: "231px",
-                                  // padding: "12px 0px",
-                                  flexDirection: "column",
-                                  alignItems: "flex-start",
-                                  gap: "8px",
-                                }}
-                              >
-                                <CardContent
-                                  style={{
-                                    paddingTop: "12px",
-                                    paddingLeft: "3px",
+                                    display: "flex",
+                                    width: "231px",
+                                    // padding: "12px 0px",
+                                    flexDirection: "column",
+                                    alignItems: "flex-start",
+                                    gap: "8px",
                                   }}
                                 >
-                                  <Typography
+                                  <CardContent
                                     style={{
-                                      width: "231px",
-                                      color: "#000",
-                                      fontFamily: "Inter",
-                                      fontSize: "16px",
-                                      fontStyle: "normal",
-                                      fontWeight: "700",
-                                      lineHeight: "normal",
+                                      paddingTop: "12px",
+                                      paddingLeft: "0px",
+                                      paddingBottom: "0px",
+                                      paddingRight: "0px",
+                                      width: "100%",
+                                      height: "100%",
                                     }}
                                   >
-                                    {result.placeName}
-                                  </Typography>
-                                  <Typography
-                                    style={{
-                                      width: "231px",
-                                      height: "23px",
-                                      color: "#959595",
-                                      fontFamily: "Inter",
-                                      fontSize: "10px",
-                                      fontStyle: "normal",
-                                      fontWeight: "400",
-                                      lineHeight: "normal",
-                                      paddingTop: "6px",
-                                    }}
-                                  >
-                                    {result.address}
-                                  </Typography>
-                                  <Grid
-                                    container
-                                    style={{ paddingTop: "26px" }}
-                                  >
-                                    <Grid item xs={2}>
-                                      <Typography
+                                    <Grid Container>
+                                      <Grid item xs={8}>
+                                        <Typography
+                                          style={{
+                                            width: "231px",
+                                            color: "#000",
+                                            fontFamily: "Inter",
+                                            fontSize: "16px",
+                                            fontStyle: "normal",
+                                            fontWeight: "700",
+                                            lineHeight: "normal",
+                                          }}
+                                        >
+                                          {result.placeName}
+                                        </Typography>
+                                      </Grid>
+
+                                      <Grid item xs={8}>
+                                        <Typography
+                                          style={{
+                                            width: "231px",
+                                            height: "23px",
+                                            color: "#959595",
+                                            fontFamily: "Inter",
+                                            fontSize: "10px",
+                                            fontStyle: "normal",
+                                            fontWeight: "400",
+                                            lineHeight: "normal",
+                                            paddingTop: "6px",
+                                          }}
+                                        >
+                                          {result.address}
+                                        </Typography>
+                                      </Grid>
+
+                                      <Grid
+                                        container
+                                        style={{ paddingTop: "26px" }}
+                                      >
+                                        <Grid item xs={2}>
+                                          <Typography
+                                            style={{
+                                              color: "#000",
+                                              fontFamily: "Inter",
+                                              fontSize: "12px",
+                                              fontStyle: "normal",
+                                              fontWeight: "500",
+                                              lineHeight: "normal",
+                                              paddingTop: "3px",
+                                            }}
+                                          >
+                                            {result.ratings}
+                                          </Typography>
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                          <Rating
+                                            name="read-only"
+                                            precision={0.5}
+                                            size="small"
+                                            value={result.ratings}
+                                            readOnly
+                                          />
+                                        </Grid>
+                                        <Grid item xs={3}>
+                                          <Typography
+                                            style={{
+                                              color: "#ABABAB",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "400",
+                                              lineHeight: "normal",
+                                              paddingTop: "3px",
+                                            }}
+                                          >
+                                            {result.reviews}
+                                          </Typography>
+                                        </Grid>
+                                      </Grid>
+                                      <Divider
                                         style={{
-                                          color: "#000",
-                                          fontFamily: "Inter",
-                                          fontSize: "12px",
-                                          fontStyle: "normal",
-                                          fontWeight: "500",
-                                          lineHeight: "normal",
-                                          paddingTop: "3px",
+                                          height: "1px",
+                                          width: "220px",
+                                          marginTop: "14px",
+                                          border: "none",
+                                          borderBottom: "2px dotted #D8D8D8",
+                                        }}
+                                      />
+                                      <Grid
+                                        Container
+                                        style={{
+                                          display: "flex",
+                                          marginTop: "10px",
                                         }}
                                       >
-                                        {result.ratings}
-                                      </Typography>
+                                        <Grid
+                                          item
+                                          xs={3}
+                                          style={{
+                                            borderRight: "1px solid #C8CFDA",
+                                            height: "40px",
+                                          }}
+                                        >
+                                          <Link
+                                            href={result["bpp-link1"]}
+                                            underline="always"
+                                            style={{
+                                              color: "#005FFE",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "500",
+                                              lineHeight: "normal",
+                                            }}
+                                          >
+                                            {result.description1}
+                                          </Link>
+                                          <OpenInNewIcon
+                                            sx={{
+                                              width: "12px",
+                                              height: "10px",
+                                              marginLeft: "4px",
+                                            }}
+                                            color="action"
+                                          />
+                                          <Typography
+                                            style={{
+                                              color: "#000",
+                                              fontFamily: "Inter",
+                                              fontSize: "12px",
+                                              fontStyle: "normal",
+                                              fontWeight: "700",
+                                              lineHeight: "normal",
+                                              marginTop: "8px",
+                                            }}
+                                          >
+                                            {result.price1}
+                                          </Typography>
+                                        </Grid>
+
+                                        <Grid
+                                          item
+                                          xs={5}
+                                          style={{
+                                            borderRight: "1px solid #C8CFDA",
+                                            height: "40px",
+                                          }}
+                                        >
+                                          <Link
+                                            href={result["bpp-link2"]}
+                                            underline="always"
+                                            style={{
+                                              color: "#005FFE",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "500",
+                                              lineHeight: "normal",
+                                              marginLeft: "9px",
+                                            }}
+                                          >
+                                            {result.description2}
+                                          </Link>
+                                          <OpenInNewIcon
+                                            sx={{
+                                              width: "12px",
+                                              height: "10px",
+                                              marginLeft: "4px",
+                                            }}
+                                            color="action"
+                                          />
+                                          <Typography
+                                            style={{
+                                              color: "#000",
+                                              fontFamily: "Inter",
+                                              fontSize: "12px",
+                                              fontStyle: "normal",
+                                              fontWeight: "700",
+                                              lineHeight: "normal",
+                                              marginLeft: "9px",
+                                              marginTop: "8px",
+                                            }}
+                                          >
+                                            {result.price2}
+                                          </Typography>
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                          <Typography
+                                            style={{
+                                              color: "#005FFE",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "600",
+                                              lineHeight: "normal",
+                                              marginLeft: "9px",
+                                              marginTop: "1px",
+                                            }}
+                                          >
+                                            See More
+                                          </Typography>
+                                          <Button
+                                            style={{
+                                              height: "10px",
+                                              marginTop: "3px",
+                                            }}
+                                          >
+                                            <KeyboardArrowDownIcon fontSize="small" />
+                                          </Button>
+                                        </Grid>
+                                      </Grid>
                                     </Grid>
-                                    <Grid item xs={6}>
-                                      <Rating
-                                        name="read-only"
-                                        precision={0.5}
-                                        size="small"
-                                        value={result.ratings}
-                                        readOnly
+                                  </CardContent>
+
+                                  {/* <CardActions>
+                                  <Button size="small" color="primary">
+                                    See detail
+                                  </Button>
+                                </CardActions> */}
+                                </Grid>
+                                <Grid
+                                  item
+                                  xs={3}
+                                  style={{
+                                    borderLeft: "1px solid #C8CFDA",
+                                  }}
+                                >
+                                  <Grid Container>
+                                    <Grid item xs={12}>
+                                      {result.greatprice ? (
+                                        <Box
+                                          style={{
+                                            display: "flex",
+                                            width: "80px",
+                                            height: "20px",
+                                            padding: "4px",
+                                            marginLeft: "6px",
+                                            marginTop: "8px",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            gap: "8px",
+                                            borderRadius: "4px",
+                                            backgroundColor: "#005FFE",
+                                          }}
+                                        >
+                                          <Typography
+                                            style={{
+                                              color: "#FFF",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "600",
+                                              lineHeight: "22px",
+                                              letterSpacing: "-0.1px",
+                                            }}
+                                          >
+                                            {result.greatprice}
+                                          </Typography>
+                                        </Box>
+                                      ) : (
+                                        <div
+                                          style={{ marginTop: "28px" }}
+                                        ></div>
+                                      )}
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                      <CardMedia
+                                        component="img"
+                                        image={result.logo}
+                                        alt="logo"
+                                        style={{
+                                          width: "60%",
+                                          height: "25px",
+                                          marginLeft: "6px",
+                                          marginTop: "5px",
+                                        }}
                                       />
                                     </Grid>
-                                    <Grid item xs={4}>
-                                      <Typography
+                                    <Grid
+                                      item
+                                      xs={12}
+                                      style={{ display: "flex" }}
+                                    >
+                                      <del
                                         style={{
-                                          color: "#ABABAB",
+                                          width: "55px",
+                                          color: "#FE007A",
                                           fontFamily: "Inter",
                                           fontSize: "10px",
                                           fontStyle: "normal",
                                           fontWeight: "400",
                                           lineHeight: "normal",
-                                          paddingTop: "3px",
+                                          marginTop: "5px",
+                                          marginLeft: "6px",
                                         }}
                                       >
-                                        {result.reviews}
+                                        {result.originalprice}
+                                      </del>
+                                      <Typography
+                                        style={{
+                                          color: "#FE007A",
+                                          fontFamily: "Inter",
+                                          fontSize: "10px",
+                                          fontStyle: "normal",
+                                          fontWeight: "700",
+                                          lineHeight: "normal",
+                                          marginTop: "5px",
+                                          marginLeft: "5px",
+                                        }}
+                                      >
+                                        {result.discount}
                                       </Typography>
                                     </Grid>
+                                    <Grid
+                                      item
+                                      xs={12}
+                                      style={{
+                                        display: "flex",
+                                      }}
+                                    >
+                                      <Typography
+                                        style={{
+                                          color: "#000",
+                                          fontFamily: "Inter",
+                                          fontSize: "16px",
+                                          fontStyle: "normal",
+                                          fontWeight: "700",
+                                          lineHeight: "135.023%",
+                                          marginTop: "10px",
+                                          marginLeft: "4px",
+                                        }}
+                                      >
+                                        {result.price}
+                                      </Typography>
+                                      <Typography
+                                        style={{
+                                          color: "#BCBCBC",
+                                          fontFamily: "Inter",
+                                          fontSize: "10px",
+                                          fontStyle: "normal",
+                                          fontWeight: "400",
+                                          lineHeight: "135.023%",
+                                          marginTop: "15px",
+                                          marginLeft: "5px",
+                                        }}
+                                      >
+                                        {result.pricedesc1}
+                                      </Typography>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                      <Typography
+                                        style={{
+                                          color: "#BCBCBC",
+                                          fontFamily: "Inter",
+                                          fontSize: "10px",
+                                          fontStyle: "normal",
+                                          fontWeight: "400",
+                                          lineHeight: "135.023%",
+                                          marginLeft: "3px",
+                                        }}
+                                      >
+                                        {result.pricedesc2}
+                                      </Typography>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                      <Typography
+                                        style={{
+                                          color: "#BCBCBC",
+                                          fontFamily: "Inter",
+                                          fontSize: "10px",
+                                          fontStyle: "normal",
+                                          fontWeight: "400",
+                                          lineHeight: "135.023%",
+                                          marginTop: "12px",
+                                          marginLeft: "3px",
+                                        }}
+                                      >
+                                        {result.desc}
+                                      </Typography>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                      {result.buttonname ? (
+                                        <Button
+                                          variant="contained"
+                                          style={{
+                                            width: "120px",
+                                            height: "24px",
+                                            backgroundColor: "#775DA6",
+                                            marginLeft: "8px",
+                                            marginTop: "7px",
+                                          }}
+                                          onMouseDown={(event) =>
+                                            event.stopPropagation()
+                                          }
+                                          onClick={(event) => {
+                                            event.stopPropagation();
+                                            event.preventDefault();
+                                            console.log("Button clicked");
+                                          }}
+                                        >
+                                          <Typography
+                                            style={{
+                                              color: "#FFF",
+                                              fontFamily: "Inter",
+                                              fontSize: "10px",
+                                              fontStyle: "normal",
+                                              fontWeight: "600",
+                                              lineHeight: "22px",
+                                              letterSpacing: "-0.1px",
+                                            }}
+                                          >
+                                            {result.buttonname}
+                                          </Typography>
+                                        </Button>
+                                      ) : (
+                                        ""
+                                      )}
+                                    </Grid>
                                   </Grid>
-                                  <Divider
-                                    style={{
-                                      height: "1px",
-                                      width: "230px",
-                                      marginTop: "12px",
-                                      border: "none",
-                                      borderBottom: "2px dotted #D8D8D8",
-                                    }}
-                                  />
-                                </CardContent>
-                                {/* <CardActions>
-                                  <Button size="small" color="primary">
-                                    See detail
-                                  </Button>
-                                </CardActions> */}
+                                </Grid>
                               </Grid>
-                            </Grid>
-                          </CardActionArea>
-                        </Card>
-                      </Grid>
-                    ))}
+                            </CardActionArea>
+                          </Card>
+                        </Grid>
+                      );
+                    })}
                   </Grid>
                 </TabPanel>
               </Box>
